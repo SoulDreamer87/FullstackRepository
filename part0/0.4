@@ -1,0 +1,20 @@
+sequenceDiagram
+    actor User
+    participant Browser
+    participant Server as studies.cs.helsinki.fi
+
+    User->>Browser: Write a note and click Save
+    Browser->>Server: POST /exampleapp/new_note<br/>Content-Type: application/x-www-form-urlencoded<br/>note=New+note
+    Server->>Server: Store note with its creation date
+    Server-->>Browser: 302 Found<br/>Location: /exampleapp/notes
+    Browser->>Server: GET /exampleapp/notes
+    Server-->>Browser: HTML document
+    Browser->>Server: GET /exampleapp/main.css
+    Server-->>Browser: CSS stylesheet
+    Browser->>Server: GET /exampleapp/main.js
+    Server-->>Browser: JavaScript file
+    Note right of Browser: Execute JavaScript to fetch notes
+    Browser->>Server: GET /exampleapp/data.json
+    Server-->>Browser: Notes as JSON, including the new note
+    Browser->>Browser: Render notes on the page
+    Browser-->>User: Display the updated notes

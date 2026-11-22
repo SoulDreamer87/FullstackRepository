@@ -1,0 +1,14 @@
+sequenceDiagram
+    actor User
+    participant Browser
+    participant Server as studies.cs.helsinki.fi
+
+    User->>Browser: Write a note and click Save
+    Note right of Browser: JavaScript handles form submission<br/>and prevents the default page reload
+    Browser->>Browser: Create note with content and date
+    Browser->>Browser: Add note to local list and clear text field
+    Browser->>Browser: Redraw notes to display the new note
+    Browser->>Server: POST /exampleapp/new_note_spa<br/>Content-Type: application/json<br/>{"content": "New note", "date": "..."}
+    Server->>Server: Store the new note
+    Server-->>Browser: 201 Created<br/>{"message": "note created"}
+    Note over Browser,Server: No redirect or page reload

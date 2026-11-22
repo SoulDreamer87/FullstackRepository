@@ -1,0 +1,17 @@
+sequenceDiagram
+    actor User
+    participant Browser
+    participant Server as studies.cs.helsinki.fi
+
+    User->>Browser: Open https://studies.cs.helsinki.fi/exampleapp/spa
+    Browser->>Server: GET /exampleapp/spa
+    Server-->>Browser: HTML document
+    Browser->>Server: GET /exampleapp/main.css
+    Server-->>Browser: CSS stylesheet
+    Browser->>Server: GET /exampleapp/spa.js
+    Server-->>Browser: JavaScript file
+    Note right of Browser: Execute JavaScript to fetch notes
+    Browser->>Server: GET /exampleapp/data.json
+    Server-->>Browser: Notes as JSON
+    Browser->>Browser: Render notes on the page
+    Browser-->>User: Display the notes app
